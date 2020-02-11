@@ -86,19 +86,20 @@ appearance:
 profile:
   # `email` is used for gravatar(https://en.gravatar.com),
   # fallback to `hexo.config.email` if not specified
-  email:
+  email: vrjurev@gmail.com
 
   # You can set Avatar URL directly
-  # avatar:
+  #avatar: https://www.gravatar.com/avatar/bd9347e57050b8e41185c9871043b7a1
 
-  bio: Awesome guy.
+  bio: 
 
 # Sidebar navigation links
 menu:
   Home: /
+  Gallery: /testPage
   # About: /about
   # Links: /links
-  # Github: https://github.com/username
+  # Github: https://github.com/vrjure
 
 # Social media URL
 # Try to sort by changing the order of the keys
@@ -108,7 +109,7 @@ sns:
   # If you use hexo-generator-feed, `sns.feed` can be left blank
   # and the theme will try to get `hexo.config.feed.path`.
   feed:
-  github:
+  github: https://github.com/vrjure
   twitter:
   facebook:
   instagram:
@@ -150,7 +151,7 @@ page:
   # toc: false
 
   # Display reward, default to `false`
-  # reward: true
+  reward: true
 
   # Display copyright notice, default to `false`
   # copyright: true
@@ -247,7 +248,7 @@ toc:
 # Reward
 reward:
   # Text which shows at the top.
-  # text: Buy me a cup of coffee ☕.
+  text: Buy me a cup of coffee ☕.
 
   # Payment Methods
   # qrcode, url and text must be set at least one
@@ -259,7 +260,20 @@ reward:
   #     url: https://paypal.me/imelmore
   #     text: This is a paypal payment link
   #     color: '#09bb07'
-
+  methods:
+    - 
+     name: paypal
+     qrcode: /images/payment/paypal_qr.png
+     color: '#09bb07'
+    -
+     name: wechat
+     qrcode: /images/payment/wx_qr.png
+     color: '#09bb07'
+    -
+     name: alipay
+     qrcode: /images.payment/zfb_qr.png
+     color: '#09bb07'
+  
 # Copyright notice
 # It is possible to use front matter `copyright` to override this setting.
 copyright:

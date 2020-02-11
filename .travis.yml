@@ -12,7 +12,7 @@ deploy:
   provider: pages
   skip_cleanup: true
   token: $GH_TOKEN
-  keep_history: false
+  keep_history: true
   local_dir: public
   target_branch: master
   on:
