@@ -9,10 +9,12 @@ branches:
 script:
   - hexo generate # generate static files
 deploy:
-  provider: pages:git
+  provider: pages
   cleanup: true
   token: $GH_TOKEN
   keep_history: false
   local_dir: public
   target_branch: master
+  on:
+    all_branches: true
     
