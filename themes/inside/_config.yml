@@ -96,7 +96,7 @@ profile:
 # Sidebar navigation links
 menu:
   Home: /
-  Gallery: /testPage
+  Gallery: /gallary
   # About: /about
   # Links: /links
   # Github: https://github.com/vrjure
@@ -163,7 +163,7 @@ post:
 
   # The following settings are the same as the page
   # toc: false
-  # reward: true
+  reward: true
   # copyright: true
 
 # Archive
