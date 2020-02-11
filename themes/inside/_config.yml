@@ -271,7 +271,7 @@ reward:
      color: '#09bb07'
     -
      name: alipay
-     qrcode: /images.payment/zfb_qr.png
+     qrcode: /images/payment/zfb_qr.png
      color: '#09bb07'
   
 # Copyright notice
