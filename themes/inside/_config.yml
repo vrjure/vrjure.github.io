@@ -105,7 +105,7 @@ menu:
 # Try to sort by changing the order of the keys
 sns:
   # `email` will fallback to `profile.email` if not specified
-  email:
+  email: vvryoung@outlook.com
   # If you use hexo-generator-feed, `sns.feed` can be left blank
   # and the theme will try to get `hexo.config.feed.path`.
   feed:
@@ -154,7 +154,7 @@ page:
   reward: true
 
   # Display copyright notice, default to `false`
-  # copyright: true
+  copyright: true
 
 
 # Post
@@ -164,7 +164,7 @@ post:
   # The following settings are the same as the page
   # toc: false
   reward: true
-  # copyright: true
+  copyright: true
 
 # Archive
 archive:
@@ -278,14 +278,12 @@ reward:
 # It is possible to use front matter `copyright` to override this setting.
 copyright:
   # Display author, default to `true`
-  # author: true
+   author: false
 
   # Display link, default to `true`
-  # link: false
+   link: true
 
-  # license: Attribution-NonCommercial-NoDerivatives 4.0 International
-  #   (<a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\"
-  #   rel=\"external nofollow\" target=\"_blank\">CC BY-NC-ND 4.0</a>)
+   license: Attribution-NonCommercial-NoDerivatives 4.0 International (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-ND 4.0</a>)
 
   # Display published date, default to `false`
   # published: false
@@ -294,18 +292,18 @@ copyright:
   # updated: false
 
   # Custom text, override above settings
-  # custom: my copyright
+  # custom: <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
 
 # Comments
 # Built-in support Disqus (https://disqus.com) and LiveRe (https://livere.com),
 # for other comment system, see plugins
 comments:
-  # disqus:
-  #   shortname: disqus_shortname
+   disqus:
+     shortname: vrjure
   #   # Or you can set disqus script URL directly
-  #   script: //disqus_shortname.disqus.com/embed.js
+  #  script: //disqus_zbJPE8FuZt.disqus.com/embed.js
   #   # Autoload, default to `true`, set to `false` to display a button
-  #   autoload: false
+     autoload: false
 
   # livere:
   #   uid: livere_uid
@@ -398,13 +396,28 @@ pwa:
 # ```bash
 # npm install babel-core babel-preset-env html-minifier uglify-js --save
 # ```
-# plugins:
+plugins:
+  - tag: script
+    type: text/x-mathjax-config
+    code: |
+      MathJax.Hub.Config({
+        showProcessingMessages: false,
+        messageStyle: 'none',
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+      })
+  - //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML
+  - position: post
+    template: |
+      <script>window.MathJax && MathJax.Hub.Queue(['Typeset', MathJax.Hub, document.querySelector('main')])</script>
+
 #   # Dynamic inject html snippet
-#   - position: # `sidebar` | `post` | `page` | `comments` | `avatar`, can be an array
+#  - position: post # `sidebar` | `post` | `page` | `comments` | `avatar`, can be an array
 
 #     # HTML code
-#     template: |
-#       <script>...</script>
+#    template: |
+#       <script>
+#        window.MathJax && MathJax.Hub.Queue(['Typeset', MathJax.Hub, document.querySelector('main')])
+#       </script>
 #     # Or a path relative to theme folder
 #     template: snippets/snippet-1.html
 
@@ -413,15 +426,16 @@ pwa:
 #   # In general, script or style depends on their ext name.
 #   - //xxx.css
 #   - //xxx.js
+#  - //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML
 
 #   # A few more flexible examples
 
 #   # <script src="//sample.com/api.php?format=jsonp" id="sample-api" defer></script>
-#   - tag: script # html tag, `script` | `style` | `link`
-#     # Any possible attributes
-#     src: //sample.com/api.php?format=jsonp
-#     id: sample-api
-#     defer: true
+#  - tag: script # html tag, `script` | `style` | `link`
+     # Any possible attributes
+#    src: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+#    id: MathJax-script
+#    defer: true
 
 #   # <link rel="stylesheet" href="xxx.css" disable>
 #   - tag: link
@@ -430,14 +444,14 @@ pwa:
 
 #   # Inline script
 #   # <script type="text/x-mathjax-config">MathJax.Hub.Config({...})</script>
-#   - tag: script
-#     type: text/x-mathjax-config
-#     code: |
-#         MathJax.Hub.Config({
-#           showProcessingMessages: false,
-#           messageStyle: 'none',
-#           tex2jax: { inlineMath: [['s;,'s;], ['\\(','\\)']] }
-#         })
+#  - tag: script
+#    type: text/x-mathjax-config
+#   code: |
+#     MathJax.Hub.Config({
+#        showProcessingMessages: false,
+#        messageStyle: 'none',
+#        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] }
+#      })
 #     # Or a path relative to theme folder
 #     code: snippets/mathjax-config.js
 
