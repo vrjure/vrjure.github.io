@@ -2,17 +2,15 @@
 title: Welcome
 date: 2020-02-12 20:56:25
 copyright: false
+thumbnail: ../images/202002142327.jpg
+reward: false
 ---
 
 ## Welcome
 
 准备开始写博客啦
 
-本来想着自己用aspnetcore+vue写一个blog，也顺便学习一下aspnetcore。但是无奈不懂的太多，等不了啦！于是就用就来Github Pages 啦！
-
-## About
-
-本blog部署在GitHub Pages上。用的是[Hexo]框架。挺不错的一个框架(吐槽下 官方的教程是多久没更新了...)。主题是[Inside] (大佬的主题真的很nice)
+本blog用的是[Hexo]框架。主题是[Inside]
 
 [Hexo]: https://hexo.io/
 [Inside]: https://blog.oniuo.com/
@@ -26,7 +24,6 @@ copyright: false
 ```
 
 # h1
-
 
 ``` md
 ## h2
