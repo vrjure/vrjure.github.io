@@ -2,7 +2,7 @@
 title: Welcome
 date: 2020-02-12 20:56:25
 copyright: false
-thumbnail: ../images/202002142327.jpg
+thumbnail: https://vk25gq.bn.files.1drv.com/y4mDciz9w37YtsOYrvv7r8e7jMfQa7lJqUBORi6SpfHLxIE45eXrkDFPq91gjwvpQSB_2970aa0-9LOpa6QbqN0qHkdvVJh00pWl1gU2narNbahTzt5BXURXCuB7wkhEV6i5j747p0gdAR2ZRUjdBTNHJKhoGzTaNC38Qp6v3zzPsJqymH-eW5cMCrPBAOdGK5Z-PvhR-UzJnsJbEOjjFdPdQ
 reward: false
 ---
 

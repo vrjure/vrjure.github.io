@@ -263,15 +263,15 @@ reward:
   methods:
     - 
      name: paypal
-     qrcode: /images/payment/paypal_qr.png
+     qrcode: https://u63dgq.bn.files.1drv.com/y4mj9uxSj9zpF80XYkqSgHw4rV4KmeMGnAC-3bz1iDFP-2e8g6588Xtx2tbxVT-kcYej82voYJoQepmHu-R6W5gPmdQ9JUHUKaAM69aKcE211AHB8b3vfDykGlr2gSSWnbV2lwASd4KEY-yJhG0hZzjBfnL1i8oobEM48_9iexMLMz7bNpbT6d8VEOcWlYovVgIG3xt2RsXmZXFq4sasA02aw
      color: '#09bb07'
     -
      name: wechat
-     qrcode: /images/payment/wx_qr.png
+     qrcode: https://u63egq.bn.files.1drv.com/y4mOYQyfqUD8EHsn_vUY2tPtpb2hI0GO5C9gEtsBljFPW68m1D_dej5ycEu7mVh1FKhddvdKY8Z-mhC0Rea3FkgCg_v2PvdbaDPafwmZJgzknns5fn_1P4OLcuPU96o9qkKosQqhvTzx5Ca-3b_IcVBNV80TGo010AZ2i7u8NdYfCSNyRxFZ574T4DfVYfXUSLbH6KKh1Ssz72EDYxTxGiDXA
      color: '#09bb07'
     -
      name: alipay
-     qrcode: /images/payment/zfb_qr.png
+     qrcode: https://u63cgq.bn.files.1drv.com/y4m97QKpt0KWuN_jzS71lut_-PVLR5IXweMbb7rl0SVhJyTNJuHKMgYl5Z0kBO1rB7901Y6UDG2KS7zaVZitZh5P-aRmDa4kiGZ8tgb4ZTUNRMpTATbL7MaHEy_UBlAtzWYYNZ_owVCra4DhakHc2NyhAJ0xvL0Hs1fJo4okHpwsuQx3bCpJO01tCzzTVpi1Jos_jpRNuICSAaqQfMXqFguWw
      color: '#09bb07'
   
 # Copyright notice
