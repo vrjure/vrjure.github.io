@@ -25,6 +25,14 @@
 {% if theme.ga %}
 {{ ga(theme.ga) | safe }}
 {% endif %}
+{% if theme.mermaid.enable %}
+  <script src='https://unpkg.com/mermaid@{{ theme.mermaid.version }}/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({{ JSON.stringify(theme.mermaid.options) }});
+    }
+  </script>
+{% endif %}
 </head>
 <body lang="{{ config.language }}">
 <{{ theme.runtime.selector }}></{{ theme.runtime.selector }}>
