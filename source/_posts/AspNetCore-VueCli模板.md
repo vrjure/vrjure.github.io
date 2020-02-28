@@ -61,220 +61,224 @@ AspNetCore一直以来都有前端框架的Spa开发模板。AspNetCore 2.0时�
 
 #### 创建webapi模板
 
-    创建模板并添加SpaServices扩展
+创建模板并添加SpaServices扩展
 
-    ```cmd
-    dotnet new webapi -o AspNetCoreVueCliTemplate
-    cd AspNetCoreVueCliTemplate
-    dotnet add package cd Microsoft.AspNetCore.SpaServices.Extensions --version 3.1.2
-    ```
+```cs
+dotnet new webapi -o AspNetCoreVueCliTemplate
+cd AspNetCoreVueCliTemplate
+dotnet add package cd Microsoft.AspNetCore.SpaServices.Extensions --version 3.1.2
+```
 
 #### 创建vue模板
 
-    在项目目录下创建vue模板
+在项目目录下创建vue模板
 
-    ```cmd
-    vue create clientapp
-    ```
+```cs
+vue create clientapp
+```
 
-    vue创建过程中,按照提示一步步来，包管理工具选择yarn,使用npm也没有关系
+vue创建过程中,按照提示一步步来，包管理工具选择yarn,使用npm也没有关系
 
 #### 添加中间件VueDevelopmentServerMiddleware
 
-1. 从[GitHub](https://github.com/DaniJG/ASPCoreVueCLITemplates/tree/master/alternative-spa-template)将Middleware中的内容全部搬运到自己项目下(包括文件夹)。完成后项目结构如下：
+##### 从[GitHub](https://github.com/DaniJG/ASPCoreVueCLITemplates/tree/master/alternative-spa-template)将Middleware中的内容全部搬运到自己项目下(包括文件夹)。完成后项目结构如下：
 
-    ![middleware](https://u62pgq.bn.files.1drv.com/y4m9xxeXTdO0Y2y9rzTERsEMgQjL621_95Qls6cpi_k-GrxattPp-WDtJ0-Gpph8K_VZNg9hVzMEBeH6mRX_RF2jJOyc9WOe12O4xCR3L2mxxt4qe5UJIW189YluXf2q_YcpLp5eNqVoyjZOzxn53HIuy1eXWCwXh79GUQGfp3b9swU-1EQRBibKAFL3Xj8r2yyKKggc1t_byQVtNNOHWufJg)
+  ![middleware](https://u62pgq.bn.files.1drv.com/y4m9xxeXTdO0Y2y9rzTERsEMgQjL621_95Qls6cpi_k-GrxattPp-WDtJ0-Gpph8K_VZNg9hVzMEBeH6mRX_RF2jJOyc9WOe12O4xCR3L2mxxt4qe5UJIW189YluXf2q_YcpLp5eNqVoyjZOzxn53HIuy1eXWCwXh79GUQGfp3b9swU-1EQRBibKAFL3Xj8r2yyKKggc1t_byQVtNNOHWufJg)
 
-    YarnScriptRunner是NpmScriptRunner改的
+   YarnScriptRunner是NpmScriptRunner改的
 
-2. 修改项目使用的包管理工具配置npm->yarn
-  *使用npm的跳过。*
-    - **将NpmScriptRunner.cs中有关使用npm执行的命令全部换成yarn**。
+##### 修改项目使用的包管理工具配置npm->yarn
 
-      ```cs
-      public YarnScriptRunner(string workingDirectory, string scriptName, string arguments, IDictionary<string, string> envVars)
-      {
-          if (string.IsNullOrEmpty(workingDirectory))
-          {
-              throw new ArgumentException("Cannot be null or empty.", nameof(workingDirectory));
-          }
+*使用npm的跳过。*
 
-          if (string.IsNullOrEmpty(scriptName))
-          {
-              throw new ArgumentException("Cannot be null or empty.", nameof(scriptName));
-          }
+###### 将NpmScriptRunner.cs中有关使用npm执行的命令全部换成yarn  
 
-          var yarnExe = "yarn";
-          var completeArguments = $"run {scriptName} {arguments ?? string.Empty}";
-          if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-          {
-              // On Windows, the yarn executable is a .cmd file, so it can't be executed
-              // directly (except with UseShellExecute=true, but that's no good, because
-              // it prevents capturing stdio). So we need to invoke it via "cmd /c".
-              yarnExe = "cmd";
-              completeArguments = $"/c yarn {completeArguments}";
-          }
+```cs
+public YarnScriptRunner(string workingDirectory, string scriptName, string arguments, IDictionary<string, string> envVars)
+{
+    if (string.IsNullOrEmpty(workingDirectory))
+    {
+        throw new ArgumentException("Cannot be null or empty.", nameof(workingDirectory));
+    }
 
-          var processStartInfo = new ProcessStartInfo(yarnExe)
-          {
-              Arguments = completeArguments,
-              UseShellExecute = false,
-              RedirectStandardInput = true,
-              RedirectStandardOutput = true,
-              RedirectStandardError = true,
-              WorkingDirectory = workingDirectory
-          };
+    if (string.IsNullOrEmpty(scriptName))
+    {
+        throw new ArgumentException("Cannot be null or empty.", nameof(scriptName));
+    }
 
-          if (envVars != null)
-          {
-              foreach (var keyValuePair in envVars)
-              {
-                  processStartInfo.Environment[keyValuePair.Key] = keyValuePair.Value;
-              }
-          }
+    var yarnExe = "yarn";
+    var completeArguments = $"run {scriptName} {arguments ?? string.Empty}";
+    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+    {
+        // On Windows, the yarn executable is a .cmd file, so it can't be executed
+        // directly (except with UseShellExecute=true, but that's no good, because
+        // it prevents capturing stdio). So we need to invoke it via "cmd /c".
+        yarnExe = "cmd";
+        completeArguments = $"/c yarn {completeArguments}";
+    }
 
-          var process = LaunchNodeProcess(processStartInfo);
-          StdOut = new EventedStreamReader(process.StandardOutput);
-          StdErr = new EventedStreamReader(process.StandardError);
-      }
-      ```
+    var processStartInfo = new ProcessStartInfo(yarnExe)
+    {
+        Arguments = completeArguments,
+        UseShellExecute = false,
+        RedirectStandardInput = true,
+        RedirectStandardOutput = true,
+        RedirectStandardError = true,
+        WorkingDirectory = workingDirectory
+    };
 
-    - **修改AspNetCoreVueCliTemplate.csproj**中的配置
-      主要添加初始环境配置,修改后如下:
-
-      ```xml
-      <Project Sdk="Microsoft.NET.Sdk.Web">
-
-        <PropertyGroup>
-          <TargetFramework>netcoreapp3.1</TargetFramework>
-        </PropertyGroup>
-
-        <ItemGroup>
-          <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.2" />
-        </ItemGroup>
-
-        <ItemGroup>
-          <!-- Don't publish the SPA source files, but do show them in the project files list -->
-          <Content Remove="$(SpaRoot)**" />
-          <None Remove="$(SpaRoot)**" />
-          <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-        </ItemGroup>
-
-        <ItemGroup>
-          <Content Include="clientapp\yarn.lock" />
-          <Content Include="clientapp\package.json" />
-        </ItemGroup>
-
-        <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
-          <!-- Ensure Node.js is installed -->
-          <Exec Command="node --version" ContinueOnError="true">
-            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
-          </Exec>
-          <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
-          <Message Importance="high" Text="Restoring dependencies using 'yarn'. This may take several minutes..." />
-          <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
-        </Target>
-
-        <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
-          <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-          <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
-          <Exec WorkingDirectory="$(SpaRoot)" Command="yarn run build" />
-
-          <!-- Include the newly-built files in the publish output -->
-          <ItemGroup>
-            <DistFiles Include="$(SpaRoot)dist\**" />
-            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-              <RelativePath>%(DistFiles.Identity)</RelativePath>
-              <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-            </ResolvedFileToPublish>
-          </ItemGroup>
-        </Target>
-      </Project>
-      ```
-
-    - 还有就是Startup.cs
-      主要是添加修改vue的中间件、静态文件处理程序、以及路由。修改后如下:
-
-      ```cs
-      public class Startup
-      {
-          public Startup(IConfiguration configuration)
-          {
-              Configuration = configuration;
-          }
-
-          public IConfiguration Configuration { get; }
-
-          // This method gets called by the runtime. Use this method to add services to the container.
-          public void ConfigureServices(IServiceCollection services)
-          {
-              services.AddControllers();
-              services.AddSpaStaticFiles(configuration => {
-                  configuration.RootPath = "clientapp/dist";
-              });
-          }
-
-          // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-          public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-          {
-              if (env.IsDevelopment())
-              {
-                  app.UseDeveloperExceptionPage();
-              }
-              else
-              {
-                  app.UseHsts();
-              }
-
-              app.UseHttpsRedirection();
-
-              app.UseStaticFiles();
-
-              app.UseSpaStaticFiles();
-
-              app.UseRouting();
-
-              app.UseAuthorization();
-
-              app.UseEndpoints(endpoints =>
-              {
-                  endpoints.MapControllerRoute(name:"default", pattern: "{controller}/{action=Index}/{id?}");
-              });
-
-              if (env.IsDevelopment())
-              {
-                  app.UseVueDevelopmentServer();
-              }
-          }
-      }
-      ```
-
-4. 配置webpack,为vue服务器设置代理
-  
-    ```ts
-    module.exports = {
-      configureWebpack: {
-        // The URL where the .Net Core app will be listening.
-        //    See https://cli.vuejs.org/config/#devserver-proxy and https://webpack.js.org/configuration/dev-server#devserverproxy
-        // Instead of hardcoding something lile https://localhost:5001/,
-        // read the ASPNET_URL environment variable, injected by VueDevelopmentServerMiddleware
-        devServer: {
-          // When running in IISExpress, the env variable wont be provided. Hardcode it here based on your launchSettings.json
-          proxy: process.env.ASPNET_URL
-          //proxy: 'https://localhost:5001'
-        },
-        // Use source map for debugging in VS and VS Code
-        devtool: 'source-map',
-        // Breakpoints in VS and VSCode wont work since the source maps conside clien-app the project root, rather than its parent folder
-        output: {
-          devtoolModuleFilenameTemplate: info => {
-            const resourcePath = info.resourcePath.replace('./src', './clientapp/src')
-            return `webpack:///${resourcePath}?${info.loaders}`
-          }
+    if (envVars != null)
+    {
+        foreach (var keyValuePair in envVars)
+        {
+            processStartInfo.Environment[keyValuePair.Key] = keyValuePair.Value;
         }
+    }
+
+    var process = LaunchNodeProcess(processStartInfo);
+    StdOut = new EventedStreamReader(process.StandardOutput);
+    StdErr = new EventedStreamReader(process.StandardError);
+}
+```
+
+###### 修改AspNetCoreVueCliTemplate.csproj中的配置
+
+主要添加初始环境配置,修改后如下:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="clientapp\yarn.lock" />
+    <Content Include="clientapp\package.json" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'yarn'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="yarn run build" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+</Project>
+```
+
+###### 还有就是Startup.cs
+
+主要是添加修改vue的中间件、静态文件处理程序、以及路由。修改后如下:
+
+```cs
+public class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddControllers();
+        services.AddSpaStaticFiles(configuration => {
+            configuration.RootPath = "clientapp/dist";
+        });
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseStaticFiles();
+
+        app.UseSpaStaticFiles();
+
+        app.UseRouting();
+
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(name:"default", pattern: "{controller}/{action=Index}/{id?}");
+        });
+
+        if (env.IsDevelopment())
+        {
+            app.UseVueDevelopmentServer();
+        }
+    }
+}
+```
+
+#### 配置webpack,为vue服务器设置代理
+  
+```ts
+module.exports = {
+  configureWebpack: {
+    // The URL where the .Net Core app will be listening.
+    //    See https://cli.vuejs.org/config/#devserver-proxy and https://webpack.js.org/configuration/dev-server#devserverproxy
+    // Instead of hardcoding something lile https://localhost:5001/,
+    // read the ASPNET_URL environment variable, injected by VueDevelopmentServerMiddleware
+    devServer: {
+      // When running in IISExpress, the env variable wont be provided. Hardcode it here based on your launchSettings.json
+      proxy: process.env.ASPNET_URL
+      //proxy: 'https://localhost:5001'
+    },
+    // Use source map for debugging in VS and VS Code
+    devtool: 'source-map',
+    // Breakpoints in VS and VSCode wont work since the source maps conside clien-app the project root, rather than its parent folder
+    output: {
+      devtoolModuleFilenameTemplate: info => {
+        const resourcePath = info.resourcePath.replace('./src', './clientapp/src')
+        return `webpack:///${resourcePath}?${info.loaders}`
       }
     }
-    ```
+  }
+}
+```
 
 ## 调试
 
