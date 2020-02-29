@@ -3,9 +3,7 @@ title: AspNetCore+VueCli模板
 tags:
   - AspNetCore
   - Vue
-categories:
-  - 笔记
-  - AspNetCore
+categories: 笔记
 copyright: true
 reward: true
 date: 2020-02-28 22:46:06

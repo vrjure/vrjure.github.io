@@ -73,7 +73,7 @@ OR
 <img src="../images/31.png" alt="space" title="title" width="150" height="100" />
 ```
 
-<img src="../images/31.png" alt="space"  title="title" width="150" height="100" />
+<img src="../images/31.png" alt="space" title="title" width="150" height="100" />
 
 ### Horizontal Rules
 
@@ -162,3 +162,13 @@ $$
 $$
 f(x)=kx+b
 $$
+
+### mermaid
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
