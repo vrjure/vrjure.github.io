@@ -12,6 +12,7 @@
     "version": "4.2.0"
   },
   "dependencies": {
+    "acorn": "^7.1.1",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "hexo": "^4.0.0",
