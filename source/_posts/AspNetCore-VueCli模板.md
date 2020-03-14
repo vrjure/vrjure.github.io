@@ -337,7 +337,7 @@ module.exports = {
         // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
         "serverReadyAction": {
             "action": "openExternally",
-            "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"                
+            "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
         },
         "env": {
             "ASPNETCORE_ENVIRONMENT": "Development"
