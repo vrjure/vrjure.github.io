@@ -119,6 +119,8 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
     app.UseClientSideBlazorFiles<BlazorClient.Program>();//+++++++
 
+    app.UseStaticFiles();
+
     app.UseRouting();
 
     app.UseAuthorization();
